@@ -1,0 +1,11 @@
+Write a little about yourself
+<%= simple_form_for @profile do |f| %>
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :birthday, start_year: Date.today.year - 50, end_year: Date.today.year - 18, selected: Date.today.year - 32 %>
+  <%= f.input :sex, collection: %w[male female nonbinary other]%>
+  <%= f.input :orientation, collection: %w[straight gay bi other]%>
+  <%= f.input :bio %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <%= f.submit %>
+<% end %>

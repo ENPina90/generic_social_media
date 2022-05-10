@@ -1,0 +1,6 @@
+<%= @profiles.each do |profile| %>
+  <%= cl_image_tag(profile.photos.first.key,
+  width: 300, height: 300, crop: :fill, class: 'rounded-circle')%>
+  <h3><%= link_to profile.name, profile_path(profile) %></h3>
+  <p><%= profile.bio %></p>
+<% end %>

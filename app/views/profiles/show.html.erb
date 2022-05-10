@@ -1,0 +1,25 @@
+<%= cl_image_tag(@profile.photos.first.key,
+width: 300, height: 300, crop: :fill, class: 'rounded-circle')%>
+<h1>Hello <%= @profile.name %></h1>
+<strong><%= @profile.orientation %><%= @profile.sex %></strong>
+<p><%= @profile.bio %></p>
+<h3>You have <%= @profile.friends.count %> friends</h3>
+<ul>
+  <% @profile.friends.each do |friend|%>
+    <%= link_to friend.name, profile_path(friend) %>
+  <% end %>
+</ul>
+
+<h3>Your Posts</h3>
+
+<ul>
+  <% @profile.posts.each do |post| %>
+    <li><%= post.content %>
+      <ul>
+        <% post.comments.each do |comment| %>
+          <li><%= link_to comment.profile.name, profile_path(comment.profile) %> - <%= comment.content %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
