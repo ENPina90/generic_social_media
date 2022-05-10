@@ -5,9 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.all.each do |user|
-  puts "destroying photos"
-  user.profile.photos.purge
+if User.any?
+  User.all.each do |user|
+    puts "destroying photos"
+    puts user
+    user.profile.photos.each(&:purge)
+  end
 end
 puts "destroying users"
 Comment.destroy_all
@@ -79,7 +82,7 @@ samir.photos.attach(io: file, filename: 'samir.png', content_type: 'image/png')
     orientation: orientation,
     bio: Faker::Hipster.paragraph
   )
-  file = URI.open("https://source.unsplash.com/random/300x300/?#{orientation},#{sex}")
+  file = URI.open("https://source.unsplash.com/random/300x300/?#{sex}")
   profile.photos.attach(io: file, filename: "#{name}.png", content_type: 'image/png')
   puts "creating #{profile.name}"
 end
@@ -90,7 +93,7 @@ profiles.each do |profile|
   friends = Profile.where.not(id: profile).shuffle.take(5)
   friends.each do |friend|
     profile.friends << friend
-    friend.profile.friends << profile
+    friend.friends << profile
   end
 end
 

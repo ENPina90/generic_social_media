@@ -1,7 +1,8 @@
 class Profile < ApplicationRecord
   belongs_to :user
-  has_many_attached :photos
-  has_many :posts
+  has_many_attached :photos, dependent: :purge
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_and_belongs_to_many :friends,
     class_name: "Profile",
     join_table: :friends_profiles,
