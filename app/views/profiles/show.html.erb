@@ -1,7 +1,7 @@
 <%= cl_image_tag(@profile.photos.first.key,
 width: 300, height: 300, crop: :fill, class: 'rounded-circle')%>
 <h1>Hello <%= @profile.name %></h1>
-<strong><%= @profile.orientation %><%= @profile.sex %></strong>
+<strong><%= @profile.relationship %><%= @profile.orientation %><%= @profile.sex %></strong>
 <p><%= @profile.bio %></p>
 <h3>You have <%= @profile.friends.count %> friends</h3>
 <ul>
